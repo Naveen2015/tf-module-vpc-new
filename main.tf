@@ -3,6 +3,6 @@ resource "aws_vpc" "main" {
   tags = var.tags
 }
 
-output "vpc" {
+output "vpc_created" {
   value = aws_vpc.main.*
 }

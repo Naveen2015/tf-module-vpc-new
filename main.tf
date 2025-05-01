@@ -3,6 +3,6 @@ resource "aws_vpc" "main" {
   tags = var.tags
 }
 
-# output "vpc_created_submodule" {
-#   value = aws_vpc.main.*
-# }
+output "vpc_created_submodule" {
+  value = aws_vpc.main.*
+}

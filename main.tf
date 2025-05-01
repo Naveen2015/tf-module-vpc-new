@@ -28,7 +28,7 @@ resource "aws_internet_gateway" "igw" {
 
 resource "aws_eip" "eip" {
   count = length(lookup(lookup(var.subnets, "public",null), "cidr_block",0))
-  tags = merge(var.tags, { Name = "${var.env}-eip_${count.index+1}"})
+  tags = merge(var.tags, { Name = "${var.env}-eip-${count.index+1}"})
 }
 # resource "aws_nat_gateway" "example" {
 #   allocation_id = aws_eip.example.id

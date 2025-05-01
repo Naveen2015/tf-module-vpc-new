@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.81.0"
+    }
+  }
+}
 resource "aws_vpc" "main" {
   cidr_block = var.cidr_block
   tags = merge(var.tags, { Name = "${var.env}-vpc"})
@@ -35,6 +43,10 @@ resource "aws_nat_gateway" "example" {
   allocation_id = aws_eip.eip[count.index].id
   subnet_id     = module.subnets["public"].subnet_ids[count.index]
   tags = merge(var.tags, { Name = "${var.env}-ngw-${count.index+1}"})
+}
 
-
+resource "aws_route" "igw" {
+  count = length(module.subnets["public"].route_table_ids)
+  route_table_id = module.subnets["public"].route_table_ids[count.index]
+  gateway_id = aws_internet_gateway.igw.id
 }

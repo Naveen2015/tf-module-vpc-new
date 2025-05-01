@@ -4,9 +4,9 @@ resource "aws_vpc" "main" {
 
 }
 
-output "vpc_created_submodule" {
-  value = aws_vpc.main.*
-}
+# output "vpc_created_submodule" {
+#   value = aws_vpc.main.*
+# }
 
 module "subnets" {
   source = "./subnets"
@@ -31,9 +31,9 @@ resource "aws_eip" "eip" {
   tags = merge(var.tags, { Name = "${var.env}-eip-${count.index+1}"})
 }
 # resource "aws_nat_gateway" "example" {
-#   allocation_id = aws_eip.example.id
-#   subnet_id     = aws_subnet.example.id
-#
+#   count = length(var.subnets["public"].cidr_block)
+#   allocation_id = aws_eip.eip[count.index].id
+#   subnet_id     = aws_subnet.
 #   tags = {
 #     Name = "gw NAT"
 #   }

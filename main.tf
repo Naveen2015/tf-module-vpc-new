@@ -1,8 +1,20 @@
 resource "aws_vpc" "main" {
   cidr_block = var.cidr_block
-  tags = var.tags
+  tags = merge(var.tags, { Name = "${var.env}-vpc"})
+
 }
 
 output "vpc_created_submodule" {
   value = aws_vpc.main.*
+}
+
+module "subnets" {
+  source = "./subnets"
+  for_each = var.subnets
+  vpc_id = aws_vpc.main.id
+  cidr_block = each.value["cidr_block"]
+  name = each.value["name"]
+  tags = var.tags
+  env = var.env
+
 }

@@ -4,9 +4,9 @@ resource "aws_vpc" "main" {
 
 }
 
-# output "vpc_created_submodule_kru" {
-#   value = module.subnets
-# }
+output "vpc_created_submodule_kru" {
+  value = module.subnets
+}
 
 module "subnets" {
   source = "./subnets"

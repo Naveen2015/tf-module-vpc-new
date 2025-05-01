@@ -12,6 +12,10 @@ resource "aws_vpc" "main" {
 
 }
 
+output "vpc-details" {
+  value = aws_vpc.main.*
+}
+
 output "subnet-details" {
   value = module.subnets
 }

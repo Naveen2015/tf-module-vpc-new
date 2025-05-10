@@ -16,7 +16,7 @@ output "vpc-details" {
   value = aws_vpc.main.*
 }
 
-output "subnet-details" {
+output "subnet" {
   value = module.subnets
 }
 

@@ -12,11 +12,11 @@ resource "aws_vpc" "main" {
 
 }
 
-resource "aws_vpc_peering_connection" "foo" {
-  peer_vpc_id   = var.default_vpc_id
-  vpc_id        = aws_vpc.main.id
-  auto_accept = true
-}
+# resource "aws_vpc_peering_connection" "foo" {
+#   peer_vpc_id   = var.default_vpc_id
+#   vpc_id        = aws_vpc.main.id
+#   auto_accept = true
+# }
 
 
 module "subnets" {
